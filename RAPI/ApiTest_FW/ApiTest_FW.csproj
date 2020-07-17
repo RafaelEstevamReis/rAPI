@@ -4,29 +4,30 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{933735B7-C231-42EE-9908-F4782990C0BD}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Net.RafaelEstevam.rAPI</RootNamespace>
-    <AssemblyName>Net.RafaelEstevam.rAPI</AssemblyName>
+    <ProjectGuid>{5FB15E83-C376-4825-AC9A-97500F14F3BE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ApiTest_FW</RootNamespace>
+    <AssemblyName>ApiTest_FW</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;B_FW</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;B_FW</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -41,22 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Net.RafaelEstevam.rAPI\API.cs">
-      <Link>API.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.RafaelEstevam.rAPI\CepAPI.cs">
-      <Link>CepAPI.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.RafaelEstevam.rAPI\CnpjAPI.cs">
-      <Link>CnpjAPI.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.RafaelEstevam.rAPI\DadosCEP.cs">
-      <Link>DadosCEP.cs</Link>
-    </Compile>
-    <Compile Include="..\Net.RafaelEstevam.rAPI\EmpresaCNPJ.cs">
-      <Link>EmpresaCNPJ.cs</Link>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Net.RafaelEstevam.rAPI_FW\Net.RafaelEstevam.rAPI_FW.csproj">
+      <Project>{933735b7-c231-42ee-9908-f4782990c0bd}</Project>
+      <Name>Net.RafaelEstevam.rAPI_FW</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

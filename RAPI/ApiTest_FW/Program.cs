@@ -1,7 +1,7 @@
 ﻿using Net.RafaelEstevam.rAPI;
-using System;
+using System.Diagnostics;
 
-namespace ApiTest
+namespace ApiTest_FW
 {
     class Program
     {

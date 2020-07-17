@@ -6,4 +6,8 @@
     <RootNamespace>Net.RafaelEstevam.rAPI</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;B_CORE</DefineConstants>
+  </PropertyGroup>
+
 </Project>

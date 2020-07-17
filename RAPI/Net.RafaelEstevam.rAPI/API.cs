@@ -9,7 +9,8 @@ namespace Net.RafaelEstevam.rAPI
     public class API
     {
         private readonly string address_cnpj = "https://webserv.rafaelestevam.net/CNPJs.php?cnpj=[CNT]";
-        
+        private readonly string address_cep = "https://webserv.rafaelestevam.net/CEPs.php?cep=[CNT]";
+
         public enum Services
         {
             CNPJ,
@@ -20,10 +21,13 @@ namespace Net.RafaelEstevam.rAPI
         {
             this.key = ApiKey;
         }
-        string key;
+
+        readonly string key;
         WebClient wc;
 
+#if !DEBUG
         [DebuggerStepThrough]
+#endif
         protected string QueryContent(Services service, string contentValue)
         {
             if (!contentValue.Any(c => char.IsDigit(c))) throw new ArgumentException(); 
@@ -33,17 +37,26 @@ namespace Net.RafaelEstevam.rAPI
 
             try
             {
-                return wc.DownloadString(address_cnpj.Replace("[CNT]", contentValue));
+#if B_FW
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+#endif
+                string url = service == Services.CNPJ ? address_cnpj : address_cep;
+
+                return wc.DownloadString(url.Replace("[CNT]", contentValue));
             }
             catch (WebException ex)
             {
                 string errorContent = null;
-                var stream = ex.Response.GetResponseStream();
-                if (stream != null)
+                if (ex.Response != null)
                 {
-                    using (TextReader tr = new StreamReader(stream))
+                    var stream = ex.Response.GetResponseStream();
+                    if (stream != null)
                     {
-                        errorContent = tr.ReadToEnd();
+                        using (TextReader tr = new StreamReader(stream))
+                        {
+                            errorContent = tr.ReadToEnd();
+                        }
                     }
                 }
 
